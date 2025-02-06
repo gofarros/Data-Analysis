@@ -9,7 +9,7 @@
 - You can see step-by-step, explanation, and how the code works in [Notebook.ipynb](Notebook.ipynb).  
 - You also can do Data Definition Language to define constraints Directly in SQL with [Keys.sql](Keys.sql).
 - The dashboard is displayed in [Dashboard HR.twbx](Dashboard%20HR.twbx).
-- These are raw data we used [Employee.csv](Employee.csv), [PerformanceRating.csv](PerformanceRating.csv), and [EducationLevel.csv] (EducationLevel.csv)
+- These are raw data we used [Employee.csv](Employee.csv), [PerformanceRating.csv](PerformanceRating.csv), and [EducationLevel.csv](EducationLevel.csv)
 
 ## Dashboard
 ![alt text](image.png)
