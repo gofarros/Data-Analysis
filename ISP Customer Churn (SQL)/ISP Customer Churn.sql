@@ -1,4 +1,8 @@
---========================== Create Table ==========================--
+--====================================== Create Table ======================================--
+
+
+
+
 CREATE TABLE customer (
   id TEXT,
   is_tv_subscriber BOOLEAN,
@@ -15,9 +19,14 @@ CREATE TABLE customer (
 
 select * from customer;
 
---========================== Churn Dashboard ==========================--
 
--- Total and Churned & Stay Customer -- 
+
+
+--======================================= Churn Dashboard =======================================--
+
+
+
+--------------------------- Total and Churned & Stay Customer --------------------------- 
 SELECT 
   churn,
   COUNT(*) AS total_customers,
@@ -30,7 +39,7 @@ Tabel ini melihat keseluruhan customer yang churn dan stay di layanan, serta per
 */
 
 
--- Churn Customer by Service Failure --
+--------------------------- Churn Customer by Service Failure ---------------------------
 SELECT 
   service_failure_count,
   SUM(CASE WHEN churn = TRUE THEN 1 ELSE 0 END) AS total_churned_customers
@@ -65,7 +74,7 @@ bukan hanya nilai kumulatifnya saja.
 */
 
 
--- Churn Customer by Bill Average
+--------------------------- Churn Customer by Bill Average ---------------------------
 SELECT 
   width_bucket(bill_avg, (SELECT MIN(bill_avg) FROM customer), (SELECT MAX(bill_avg) FROM customer), 9) AS bill_group,
   COUNT(*) AS total_customers,
@@ -81,7 +90,7 @@ Bertujuan melihat apakah besarnya billing berpengaruh pada customer yang churn?
 */
 
 
--- Churn by Subscription Age --
+--------------------------- Churn by Subscription Age ---------------------------
 SELECT 
   width_bucket(subscription_age, (SELECT MIN(subscription_age) FROM customer), (SELECT MAX(subscription_age) FROM customer), 10) AS age_group,
   SUM(CASE WHEN churn = TRUE THEN 1 ELSE 0 END) AS churned_customers
@@ -94,7 +103,7 @@ Melihat apakah semakin muda/tua usia berlangganan semakin besar kecenderungannya
 */
 
 
--- Top 100 Pelanggan Beresiko Churn --
+----------------------------- Top 100 Pelanggan Beresiko Churn -----------------------------
 select id, service_failure_count, subscription_age, reamining_contract
 from customer
 where service_failure_count >=3 and reamining_contract is null
@@ -107,7 +116,7 @@ Kita juga dapat membaut scoring dari 3 faktor diatas dengan query seperti beriku
 */
 
 
--- Customer Churn Scoring --
+--------------------------- Customer Churn Scoring ---------------------------
 WITH churn_risk AS (
   SELECT
     id,
